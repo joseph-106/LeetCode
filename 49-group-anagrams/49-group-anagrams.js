@@ -1,3 +1,7 @@
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
 const groupAnagrams = function (strs) {
   const answer = [];
   const temp = [];
