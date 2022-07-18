@@ -5,11 +5,8 @@
 const subsets = function(nums) {
     const subsetArr = [];
     const recursive = (subset, temp) => {
-        if (!subsetArr.includes(subset)) subsetArr.push(subset);
-        if (temp < nums.length) {
-            recursive([...subset, nums[temp]], temp + 1);
-            recursive(subset, temp + 1);
-        }
+        subsetArr.push(subset);
+        for (let i = temp; i < nums.length; i++) recursive([...subset, nums[i]], i + 1);
     };
     recursive([], 0);
     return subsetArr;
