@@ -3,11 +3,10 @@
  * @return {number[][]}
  */
 const generate = function(numRows) {
-    const resultArr = [];
+    const pascalArr = [];
     for (let i = 0; i < numRows; i++){
-        const tempArr = [];
-        for (let j = 0; j <= i; j++) tempArr.push(j === 0 || j === i ? 1 : resultArr[i-1][j-1] + resultArr[i-1][j]);
-        resultArr.push(tempArr);
+        pascalArr[i] = [];
+        for (let j = 0; j <= i; j++) pascalArr[i][j] = (j === 0 || j === i) ? 1 : pascalArr[i-1][j-1] + pascalArr[i-1][j];
     }
-    return resultArr;
+    return pascalArr;
 };
