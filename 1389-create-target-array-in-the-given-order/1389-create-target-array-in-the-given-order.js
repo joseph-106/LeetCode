@@ -5,6 +5,6 @@
  */
 const createTargetArray = function(nums, index) {
     const resultArr = [];
-    nums.forEach((e, i) => resultArr.splice(index[i], 0, e));
+    for (const num of nums) resultArr.splice(index.shift(), 0, num);
     return resultArr;
 };
