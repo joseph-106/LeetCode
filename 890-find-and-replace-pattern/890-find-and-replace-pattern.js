@@ -11,7 +11,10 @@ const findAndReplacePattern = function(words, pattern) {
         let flag = true;
         for (let i = 0; i < pattern.length; i++) {
             if (!hashObj[pattern[i]] && !Object.values(hashObj).includes(word[i])) hashObj[pattern[i]] = word[i];
-            if (tempArr[i] !== hashObj[pattern[i]]) flag = false;
+            if (tempArr[i] !== hashObj[pattern[i]]) {
+                flag = false;
+                break;
+            }
         }
         if (flag) resultArr.push(word);
     })
