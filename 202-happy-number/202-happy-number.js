@@ -5,8 +5,7 @@
 const isHappy = function(n) {
     let res = false;
     const recursive = (num, numArr) => {
-        let sum = 0;
-        for (const digit of String(num)) sum += digit**2;
+        const sum = num.toString().split("").reduce((acc, cur) => acc += cur**2, 0);
         if (sum === 1) {
             res = true;
             return;
@@ -15,6 +14,6 @@ const isHappy = function(n) {
         numArr.push(sum);
         recursive(sum, numArr);
     }
-    recursive(n, [n]);
+    recursive(n, []);
     return res;
 };
