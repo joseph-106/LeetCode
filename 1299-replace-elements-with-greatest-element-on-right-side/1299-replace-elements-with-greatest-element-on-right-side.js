@@ -4,6 +4,10 @@
  */
 const replaceElements = function(arr) {
     const resultArr = [];
-    for (let i = 0; i < arr.length - 1; i++) resultArr.push(Math.max(...arr.slice(i+1)));
+    let max = arr[arr.length - 1];
+    for (let i = arr.length - 2; i >= 0; i--) {
+        max = Math.max(max, arr[i + 1]);
+        resultArr.unshift(max);
+    }
     return [...resultArr, -1];
 };
