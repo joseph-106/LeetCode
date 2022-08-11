@@ -3,23 +3,22 @@
  * @return {string[]}
  */
 const letterCombinations = function(digits) {
-    const letters = [
-        ['a', 'b', 'c'],
-        ['d', 'e', 'f'],
-        ['g', 'h', 'i'],
-        ['j', 'k', 'l'],
-        ['m', 'n', 'o'],
-        ['p', 'q', 'r', 's'],
-        ['t', 'u', 'v'],
-        ['w', 'x', 'y', 'z']
-    ];
+    const letters = {
+        '2': ['a', 'b', 'c'],
+        '3': ['d', 'e', 'f'],
+        '4': ['g', 'h', 'i'],
+        '5': ['j', 'k', 'l'],
+        '6': ['m', 'n', 'o'],
+        '7': ['p', 'q', 'r', 's'],
+        '8': ['t', 'u', 'v'],
+        '9': ['w', 'x', 'y', 'z']
+    };
     const resultArr = [];
-    const recursive = (temp, num) => {
+    const recursive = (temp, loc) => {
         if (temp.length === digits.length) resultArr.push(temp);
-        else {
-            if (digits[num] === '7' || digits[num] === '9') for (let i = 0; i < 4; i++) recursive(temp + letters[digits[num]-2][i], num+1);
-            else for (let i = 0; i < 3; i++) recursive(temp + letters[digits[num]-2][i], num+1);
-        };
+        else letters[digits[loc]].forEach(letter => {
+            recursive(temp + letter, loc + 1);
+        })
     };
     if (digits !== "") recursive("", 0);
     return resultArr;
