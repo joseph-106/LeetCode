@@ -4,12 +4,11 @@
  */
 const generateParenthesis = function(n) {
     const resultArr = [];
-    const recursive = (temp) => {
-        if (temp.length < 2 * n) {
-            recursive(temp + "(");
-            if (temp.split("").filter(e => e === "(").length > temp.split("").filter(e => e === ")").length) recursive(temp + ")");
-        } else if (temp.split("").filter(e => e === "(").length === temp.split("").filter(e => e === ")").length) resultArr.push(temp);
+    const recursive = (num, count, temp) => {
+        if (num === 0 && count === 0) resultArr.push(temp);
+        if (num > 0) recursive(num - 1, count + 1, temp + "(");
+        if (count > 0) recursive(num, count - 1, temp + ")");
     }
-    recursive("(");
+    recursive(n, 0, "");
     return resultArr;
 };
