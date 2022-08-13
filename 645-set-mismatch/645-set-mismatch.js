@@ -3,13 +3,15 @@
  * @return {number[]}
  */
 const findErrorNums = function(nums) {
+    const tempSet = new Set();
     let repetition;
-    let loss;
-    nums.sort((a, b) => a - b);
-    for (let i = 1; i <= nums.length; i++) {
-        if (nums[i - 1] === nums[i]) repetition = nums[i - 1];
-        if (!nums.includes(i)) loss = i;        
-        if (repetition && loss) break;
+    let sum = 0;
+    for (const num of nums) {
+        if (tempSet.has(num)) repetition = num;
+        else {
+            tempSet.add(num);
+            sum += num;
+        }
     }
-    return [repetition, loss];
+    return [repetition, (1 + nums.length) * nums.length / 2 - sum];
 };
