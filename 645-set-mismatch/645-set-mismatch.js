@@ -3,11 +3,13 @@
  * @return {number[]}
  */
 const findErrorNums = function(nums) {
-    let resultArr = new Array(2);
+    let repetition;
+    let loss;
+    nums.sort((a, b) => a - b);
     for (let i = 1; i <= nums.length; i++) {
-        if (resultArr.filter(Boolean).length === 2) break;
-        if (nums.filter(e => e === i).length === 2) resultArr[0] = i;
-        if (!nums.includes(i)) resultArr[1] = i;
-    }  
-    return resultArr;
+        if (nums[i - 1] === nums[i]) repetition = nums[i - 1];
+        if (!nums.includes(i)) loss = i;        
+        if (repetition && loss) break;
+    }
+    return [repetition, loss];
 };
