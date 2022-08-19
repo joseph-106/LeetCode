@@ -3,15 +3,17 @@
  * @return {number}
  */
 const countSubstrings = function(s) {
-    let count = s.length;
-    const isPalindrome = (x) => {
-        for (let i = 0; i < x.length/2; i++) if (x[i] !== x[x.length-1-i]) return false
-        return true;
+    let count = 0;
+    const findAll = (left, right) => {
+        while(left >= 0 && right <= s.length && s[left] === s[right]) {
+            count++;
+            left--;
+            right++;
+        }
     }
-    const recursive = (loc, temp) => {
-        if (temp.length >= 2 && isPalindrome(temp)) count++;
-        if (loc < s.length) recursive(loc + 1, temp += s[loc]);
+    for (let i = 0; i < s.length; i++) {
+        findAll(i, i);
+        findAll(i, i + 1);
     }
-    for (let i = 0; i < s.length - 1; i++) recursive(i, "");
     return count;
 };
