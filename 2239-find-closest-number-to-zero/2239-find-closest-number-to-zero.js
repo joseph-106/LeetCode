@@ -4,6 +4,5 @@
  */
 const findClosestNumber = function(nums) {
     nums.sort((a, b) => Math.abs(a) - Math.abs(b));
-    if (nums.includes(Math.abs(nums[0]))) return Math.abs(nums[0]);
-    return nums[0];
+    return nums.includes(Math.abs(nums[0])) ? Math.abs(nums[0]) : nums[0];
 };
