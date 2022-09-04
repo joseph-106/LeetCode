@@ -4,10 +4,10 @@
  */
 const allPathsSourceTarget = function(graph) {
     const allArr = [];
-    const recursive = (loc, temp) => {
-        if (loc === graph.length - 1) allArr.push(temp);
+    const recursive = (loc, tempArr) => {
+        if (loc === graph.length - 1) allArr.push(tempArr);
         else graph[loc].forEach(next => {
-            recursive(next, [...temp, next]);
+            if (!tempArr.includes(next)) recursive(next, [...tempArr, next]);
         })
     }
     recursive(0, [0]);
