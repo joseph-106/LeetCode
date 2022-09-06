@@ -5,14 +5,22 @@
 const minPathSum = function(grid) {
     const m = grid.length;
     const n = grid[0].length;
-    const tempGrid = Array.from({length: m}, () => Array(n).fill(Number.MAX_SAFE_INTEGER));
-    const recursive = (x, y, sum) => {
-        if (sum < tempGrid[x][y]) {
-            tempGrid[x][y] = sum;
-            if (x < m - 1)  recursive(x + 1, y, tempGrid[x][y] + grid[x + 1][y]);
-            if (y < n - 1) recursive(x, y + 1, tempGrid[x][y] + grid[x][y + 1]);
+    const tempGrid = Array.from({length: m}, () => []);
+    tempGrid[0][0] = grid[0][0];
+    for (let i = 1; i < m; i++) {
+        const temp = grid[i][0];
+        tempGrid[i][0] = tempGrid[i - 1][0] + temp;
+    }
+    for (let i = 1; i < n; i++) {
+        const temp = grid[0][i];
+        tempGrid[0][i] = tempGrid[0][i - 1] + temp;
+    }
+    for (let i = 1; i < m; i++) {
+        for (let j = 1; j < n; j++) {
+            const temp = grid[i][j];
+            tempGrid[i][j] = Math.min(tempGrid[i - 1][j], tempGrid[i][j - 1]) + temp;
         }
     }
-    recursive(0, 0, grid[0][0]);
+    
     return tempGrid[m - 1][n - 1];
 };
