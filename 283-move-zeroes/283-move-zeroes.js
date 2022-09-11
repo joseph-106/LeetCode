@@ -4,7 +4,7 @@
  */
 const moveZeroes = function(nums) {
     let loc = 0;
-    for (let i = 0; i < nums.length; i++) {
+    for (let i in nums) {
         if (nums[i] !== 0) {
             [nums[i], nums[loc]] = [nums[loc], nums[i]];
             loc++;
