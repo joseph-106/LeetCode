@@ -4,6 +4,8 @@
  */
 const findDuplicates = function(nums) {
     const hashObj = {};
+    const resultArr= [];
     for (const num of nums) hashObj[num] ? hashObj[num]++ : hashObj[num] = 1;
-    return Object.entries(hashObj).filter(e => e[1] > 1).map(e => e[0]); 
+    for (const num in hashObj) if (hashObj[num] === 2) resultArr.push(num);
+    return resultArr;
 };
