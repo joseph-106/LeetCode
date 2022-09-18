@@ -7,21 +7,24 @@ const exist = function(board, word) {
     let res = false;
     const m = board.length;
     const n = board[0].length;
-    const dx = [1, 0, -1, 0];
-    const dy = [0, 1, 0, -1];
-    const recursive = (x, y, loc, tempArr) => {
+    const recursive = (i, j, loc) => {
         if (loc === word.length) {
             res = true;
             return;
-        } else for (let i = 0; i < 4; i++) {
-            const nx = x + dx[i];
-            const ny = y + dy[i];
-            if (0 <= nx && nx <= m - 1 && 0 <= ny && ny <= n - 1 && board[nx][ny] === word[loc] && !tempArr.includes(`${nx},${ny}`)) recursive(nx, ny, loc + 1, [...tempArr, `${nx},${ny}`]);
         }
+        if (i >= m || j >= n || i < 0 || j < 0) return;
+        if (board[i][j] !== word[loc]) return;
+        const prev = board[i][j];
+        board[i][j] = '*';
+        recursive(i + 1, j, loc + 1);
+        recursive(i, j + 1, loc + 1);
+        recursive(i - 1, j, loc + 1);
+        recursive(i, j - 1, loc + 1);
+        board[i][j] = prev;
     }
     for (let i = 0; i < m; i ++) {
         for (let j = 0; j < n; j++) {
-            if (board[i][j] === word[0]) recursive(i, j, 1, [`${i},${j}`]);
+            recursive(i, j, 0);
             if (res) break;
         }
     }
