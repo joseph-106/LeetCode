@@ -4,14 +4,7 @@
  * @return {number}
  */
 const findPoisonedDuration = function(timeSeries, duration) {
-    let total = 0;
-    let temp = 0;
-    for (let i = 0; i < timeSeries.length - 1; i++) {
-        if (timeSeries[i] + duration < timeSeries[i + 1]) {
-            temp += duration;
-            total += temp;
-            temp = 0;
-        } else temp += timeSeries[i + 1] - timeSeries[i];
-    }
-    return total + temp + duration;
+    let res = 0;
+    for (let i = 1; i < timeSeries.length; i++) res += Math.min(timeSeries[i] - timeSeries[i - 1], duration);
+    return res + duration;
 };
