@@ -4,15 +4,13 @@
  */
 
 const arrayNesting = function(nums) {
-    let longest = 0;
+    let longest = 1;
     const set = new Set();
     const recursive = (k, len) => {
+        set.add(k);
         if (set.has(nums[k])) longest = Math.max(len, longest);
-        else {
-            set.add(nums[k]);
-            recursive(nums[k], len + 1);
-        }
+        else recursive(nums[k], len + 1);
     }
-    nums.forEach(num => recursive(num, 0));
+    nums.forEach(num => recursive(num, 1));
     return longest;
 };
